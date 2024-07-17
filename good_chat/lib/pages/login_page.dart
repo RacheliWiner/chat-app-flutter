@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../components/my_button.dart';
 import '../components/my_text_field.dart';
+import '../services/auth/auth_service.dart';
+import 'home_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,13 +17,36 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void navigatorToRegister() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterPage()),
+  void login ()async{
+    final authService =AuthService();
+    try{
+    await authService.signInWithEmailAndPassword(
+      emailController.text,
+      passwordController.text,
     );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context)=>HomePage()) 
+      );
+    }catch(e){
+      String errorMesage=authService.getErrorMessage(e.toString());
+      showDialog(
+        context: context,
+       builder:(context)=>AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text(errorMesage),
+      ),
+      );
+    }
   }
 
+
+ void navigatorToRegister(){
+   Navigator.push(
+    context,
+    MaterialPageRoute(builder:(context)=>RegisterPage()),
+   );
+ }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -63,10 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Forgot Password',
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
                     ],
@@ -74,32 +98,34 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 25,),
                 MyButton(
-                  onTap: () {},
-                  text: "Login",
+                  onTap:login,
+                  text:"Login",
                 ),
                 SizedBox(height: 50,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Not a member?',
+                      'Not a menber?',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
+                      color:Theme.of(context).colorScheme.secondary,
+
+
                       ),
                     ),
                     SizedBox(width: 4,),
                     GestureDetector(
                       onTap: navigatorToRegister,
                       child: Text(
-                        'Register now',
+                        'register now',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
+                          
                         ),
                       ),
-                    ),
+                    )
                   ],
-                ),
+                )
               ],
             ),
           ),

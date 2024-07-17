@@ -2,7 +2,8 @@
 <network-security-config>
 <base-config>
 <trust-anchors>
-<certificates src="@raw/netfree_ca"/>
+<certificates src="@raw/netfree_cert_1"/>
+ <certificates src="@raw/netfree_cert_2"/>
 <certificates src="system"/>
 </trust-anchors>
 </base-config>
