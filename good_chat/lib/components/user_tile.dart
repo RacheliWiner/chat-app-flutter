@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+
 import '../models/message.dart';
 
 class UserTile extends StatelessWidget{
   final Users users;
   final void Function()? onTap;
-  
-  const UserTile({required this.users, this.onTap});
 
-  @override
-  Widget build(BuildContext context) {
+  const UserTile({
+      required this.users,
+      required this.onTap,
+  });
+
+  Widget build(BuildContext context){
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -16,17 +19,16 @@ class UserTile extends StatelessWidget{
           color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12),
         ),
-        margin: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
+        margin: EdgeInsets.symmetric(horizontal: 25, vertical:5),
         padding: EdgeInsets.all(4),
         child: Row(
-          children: [
+          children:[
             Padding(
               padding: EdgeInsets.all(20),
               child: Stack(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Theme.of(context).colorScheme.primary,
+                children:[
+                  Icon(Icons.person,
+                  color: Theme.of(context).colorScheme.primary,
                   ),
                   if(users.hasUnreadMessages)
                   Positioned(
@@ -36,16 +38,18 @@ class UserTile extends StatelessWidget{
                       height: 12,
                       decoration: BoxDecoration(
                         color: Colors.red,
-                        shape: BoxShape.circle
+                        shape: BoxShape.circle,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
+            Text(users.email,)
           ],
         ),
       ),
     );
   }
+  
 }

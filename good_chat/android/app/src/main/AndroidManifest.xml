@@ -2,9 +2,9 @@
     package="com.example.good_chat">
     <application
         android:label="good_chat"
-        android:networkSecurityConfig="@xml/netfree_cert"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/netfree_cert">
         <activity
             android:name=".MainActivity"
             android:exported="true"

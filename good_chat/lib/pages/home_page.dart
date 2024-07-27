@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import '../components/my_app_bar.dart';
+import '../components/my_appbar.dart';
 import '../components/my_drawer.dart';
 import '../components/user_tile.dart';
 import '../models/message.dart';
 import '../services/auth/auth_service.dart';
 import '../services/chat/chat_service.dart';
 import 'chat_page.dart';
-//import 'package:flutter/widgets.dart';
 
-class HomePage extends StatelessWidget{
+class HomePage extends StatelessWidget {
   HomePage();
 
-  final AuthService _authService =  AuthService();
-  final ChatService _chatService = ChatService();
+  final AuthService _authService = AuthService();
+  final ChatService _chatService =  ChatService();
 
-Widget _buildUserList() {
+  Widget _buildUserList() {
     return StreamBuilder(
       stream: _chatService.getUsersStream(),
       builder: (context, snapshot) {
@@ -34,7 +33,7 @@ Widget _buildUserList() {
     );
   }
 
- Widget _buidUserListItem(Users user, BuildContext context) {
+  Widget _buidUserListItem(Users user, BuildContext context) {
     if (_authService.getCurrentUser()!.email != user.email) {
       return UserTile(
         users: user,
@@ -56,16 +55,17 @@ Widget _buildUserList() {
     } 
     return Container();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+
       appBar: MyAppBar(
-        title: "USER",
+        title: ("U S E R S"),
         actions: [],
       ),
       drawer: MyDrawer(),
       body: _buildUserList(),
     );
   }
-
 }

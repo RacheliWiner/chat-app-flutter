@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:good_chat/services/auth/auth_service.dart';
-
 import '../pages/login_page.dart';
-import '../pages/settings_page.dart';
+import '../pages/setting_page.dart';
+import '../services/auth/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer();
@@ -13,10 +12,9 @@ class MyDrawer extends StatelessWidget {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
-        (Route<dynamic> route) => false
+        (Route<dynamic> route) => false,
       );
-    }
-    );
+    });
   }
 
   Widget build(BuildContext context) {
@@ -50,19 +48,18 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 25, top: 0),
+                padding: EdgeInsets.only(left: 25),
                 child: ListTile(
-                  title: Text('S E T T I N G S'),
+                  title: Text("S E T T I N G"),
                   leading: Icon(Icons.settings),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => SettingsPage(),
+                      MaterialPageRoute(builder: (context) => SettingsPage()
                       ),
                     );
-                  },
+                  } 
                 ),
               ),
             ],
@@ -70,8 +67,8 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 25, bottom: 25),
             child: ListTile(
-              title: Text('L O G O U T'),
-              leading: Icon(Icons.exit_to_app),
+              title: Text("L O G O U T"),
+              leading: Icon(Icons.logout),
               onTap: () => logout(context),
             ),
           ),
